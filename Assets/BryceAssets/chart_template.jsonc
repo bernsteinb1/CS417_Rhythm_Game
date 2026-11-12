@@ -1,0 +1,376 @@
+{
+    "title": "Example Song", // title of chart in game
+    "length": 180, // length of song in seconds
+    "offset": 0.0, // offset of start for audio file and start of level
+    "filepath": "example.wav", // where to look for audio to play
+    "measures": [
+        // a measure block begins with optional metadata. If none specified, the same from the previous measure is applied.
+        // notes is a list with all notes in the measure
+        {
+            // metadata
+            "meta": {
+                "tempo": 120.0, // speed of song measured in beats per minute
+                "beats": 4, // how many beats are in a single measure
+                "subdivision": 1 // how many subbeats are present for a single beat (i.e. quarter notes would be 1, eighth notes would be 2, sixteenth notes 4)
+            },
+            "notes": [
+                // note 1
+                {
+                    "pitch": "E4", // the pitch represented. Use b for flat and # for sharp (C4 represents middle-C. One half step below that is B3 and one above is C#4)
+                    "hold": 1, // how many subbeats the note should be held for. Defaults to 1 if unspecified
+                    "start": 0 // what subbeat the note starts on (0-indexed)
+                },
+                // note 2
+                {
+                    "pitch": "E4",
+                    "start": 1
+                },
+                // note 3
+                {
+                    "pitch": "F4",
+                    "start": 2
+                },
+                // note 4
+                {
+                    "pitch": "G4",
+                    "start": 3
+                }
+            ]
+        },
+        {
+            // unspecified metadata carries over
+            "notes": [
+                {
+                    "pitch": "G4", 
+                    "start": 0
+                },
+                {
+                    "pitch": "F4", 
+                    "start": 1
+                },
+                {
+                    "pitch": "E4", 
+                    "start": 2
+                },
+                {
+                    "pitch": "D4", 
+                    "start": 3
+                }
+            ]
+        },
+        {
+            "notes": [
+                {
+                    "pitch": "C4", 
+                    "start": 0
+                },
+                {
+                    "pitch": "C4", 
+                    "start": 1
+                },
+                {
+                    "pitch": "D4", 
+                    "start": 2
+                },
+                {
+                    "pitch": "E4", 
+                    "start": 3
+                }
+            ]
+        },
+        {
+            // metadata (unspecified properties remain static)
+            "meta": {
+                "subdivision": 2 // we need eighth notes in this measure
+            },
+            "notes": [
+                // note 1 (dotted quarter note)
+                {
+                    "pitch": "E4",
+                    "hold": 3, // dotted quarter note is equal to 3 eighth notes
+                    "start": 0
+                },
+                // note 2 (eighth note starts on 3 because subdivision now larger)
+                {
+                    "pitch": "D4",
+                    "hold": 1, // 1 eighth note
+                    "start": 3
+                },
+                // note 3
+                {
+                    "pitch": "D4",
+                    "hold": 4,
+                    "start": 4
+                }
+            ]
+        },
+        {
+            // metadata returns to quarter-note subdivision
+            "meta": {
+                "subdivision": 1
+            },
+            "notes": [
+                {
+                    "pitch": "E4",
+                    "start": 0
+                },
+                {
+                    "pitch": "E4",
+                    "start": 1
+                },
+                {
+                    "pitch": "F4",
+                    "start": 2
+                },
+                {
+                    "pitch": "G4",
+                    "start": 3
+                }
+            ]
+        },
+        {
+            "notes": [
+                {
+                    "pitch": "G4", 
+                    "start": 0
+                },
+                {
+                    "pitch": "F4", 
+                    "start": 1
+                },
+                {
+                    "pitch": "E4", 
+                    "start": 2
+                },
+                {
+                    "pitch": "D4", 
+                    "start": 3
+                }
+            ]
+        },
+        {
+            "notes": [
+                {
+                    "pitch": "C4", 
+                    "start": 0
+                },
+                {
+                    "pitch": "C4", 
+                    "start": 1
+                },
+                {
+                    "pitch": "D4", 
+                    "start": 2
+                },
+                {
+                    "pitch": "E4", 
+                    "start": 3
+                }
+            ]
+        },
+        {
+            "meta": {
+                "subdivision": 2
+            },
+            "notes": [
+                {
+                    "pitch": "D4",
+                    "hold": 3,
+                    "start": 0
+                },
+                {
+                    "pitch": "C4",
+                    "hold": 1,
+                    "start": 3
+                },
+                {
+                    "pitch": "C4",
+                    "hold": 4,
+                    "start": 4
+                }
+            ]
+        },
+        {
+            "meta": {
+                "subdivision": 1
+            },
+            "notes": [
+                {
+                    "pitch": "D4", 
+                    "start": 0
+                },
+                {
+                    "pitch": "D4", 
+                    "start": 1
+                },
+                {
+                    "pitch": "E4", 
+                    "start": 2
+                },
+                {
+                    "pitch": "C4", 
+                    "start": 3
+                }
+            ]
+        },
+        {
+            "meta": {
+                "subdivision": 2
+            },
+            "notes": [
+                {
+                    "pitch": "D4", 
+                    "start": 0,
+                    "hold": 2
+                },
+                {
+                    "pitch": "E4", 
+                    "start": 2
+                },
+                {
+                    "pitch": "F4", 
+                    "start": 3
+                },
+                {
+                    "pitch": "E4", 
+                    "start": 4,
+                    "hold" : 2
+                },
+                {
+                    "pitch": "C4", 
+                    "start": 6,
+                    "hold": 2
+                }
+            ]
+        },
+        {
+            "notes": [
+                {
+                    "pitch": "D4", 
+                    "start": 0,
+                    "hold": 2
+                },
+                {
+                    "pitch": "E4", 
+                    "start": 2
+                },
+                {
+                    "pitch": "F4", 
+                    "start": 3
+                },
+                {
+                    "pitch": "E4", 
+                    "start": 4,
+                    "hold" : 2
+                },
+                {
+                    "pitch": "D4", 
+                    "start": 6,
+                    "hold": 2
+                }
+            ]
+        },
+        {
+            "meta": {
+                "subdivision": 1
+            },
+            "notes": [
+                {
+                    "pitch": "C4", 
+                    "start": 0
+                },
+                {
+                    "pitch": "D4", 
+                    "start": 1
+                },
+                {
+                    "pitch": "G3", // G3 represents lower G
+                    "start": 2,
+                    "hold": 2
+                }
+            ]
+        },
+        {
+            "notes": [
+                {
+                    "pitch": "E4",
+                    "start": 0
+                },
+                {
+                    "pitch": "E4",
+                    "start": 1
+                },
+                {
+                    "pitch": "F4",
+                    "start": 2
+                },
+                {
+                    "pitch": "G4",
+                    "start": 3
+                }
+            ]
+        },
+        {
+            "notes": [
+                {
+                    "pitch": "G4", 
+                    "start": 0
+                },
+                {
+                    "pitch": "F4", 
+                    "start": 1
+                },
+                {
+                    "pitch": "E4", 
+                    "start": 2
+                },
+                {
+                    "pitch": "D4", 
+                    "start": 3
+                }
+            ]
+        },
+        {
+            "notes": [
+                {
+                    "pitch": "C4", 
+                    "start": 0
+                },
+                {
+                    "pitch": "C4", 
+                    "start": 1
+                },
+                {
+                    "pitch": "D4", 
+                    "start": 2
+                },
+                {
+                    "pitch": "E4", 
+                    "start": 3
+                }
+            ]
+        },
+        {
+            "meta": {
+                "subdivision": 2
+            },
+            "notes": [
+                {
+                    "pitch": "D4",
+                    "hold": 3,
+                    "start": 0
+                },
+                {
+                    "pitch": "C4",
+                    "hold": 1,
+                    "start": 3
+                },
+                {
+                    "pitch": "C4",
+                    "hold": 4,
+                    "start": 4
+                }
+            ]
+        }
+    ]
+}
