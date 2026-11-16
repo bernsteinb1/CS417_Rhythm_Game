@@ -19,6 +19,8 @@ public class LoadSong : MonoBehaviour
     };
 
     public string SongFile;
+
+    public Piano sounds;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -34,7 +36,7 @@ public class LoadSong : MonoBehaviour
         double tempo = 60.0;
         int beats = 4;
         int subdivision = 1;
-
+        double startTime = AudioSettings.dspTime;
 
         foreach (JsonElement measure in measures.EnumerateArray())
         {
@@ -55,13 +57,16 @@ public class LoadSong : MonoBehaviour
                 {
                     Note n;
                     int holdBeats = note.TryGetProperty("hold", out JsonElement holdLengthEl) ? holdLengthEl.GetInt32() : 1;
-                    n.holdTime = holdBeats * (((double) beats) / subdivision) * tempo / 60;
-                    n.startTime = timestamp + note.GetProperty("start").GetInt32() * (((double) beats) / subdivision) * tempo / 60;
+                    n.holdTime = holdBeats * 60.0 / tempo / subdivision;
+                    n.startTime = timestamp + note.GetProperty("start").GetInt32() * 60 / tempo / subdivision;
                     n.audioIdx = ParseNote(note.GetProperty("pitch").GetString());
+                    AudioSource newKey = Instantiate(sounds.keys[n.audioIdx]);
+                    newKey.PlayScheduled(startTime + n.startTime);
+                    newKey.SetScheduledEndTime(startTime + n.startTime + n.holdTime);
                 }
             }
 
-            timestamp += tempo / 60 * beats / subdivision;
+            timestamp += 60.0 / tempo * beats;
         }
         Debug.Log("Done");
     }
