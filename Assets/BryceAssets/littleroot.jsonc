@@ -1,0 +1,664 @@
+{
+    "title": "Littleroot Town", 
+    "length": 180, 
+    "offset": 0.0, 
+    "filepath": "example.wav", 
+    "measures": [
+        {
+            "meta": {
+                "tempo": 110.0, 
+                "beats": 2, 
+                "subdivision": 2 
+            },
+            "notes": [
+                {
+                    "pitch": "C3", 
+                    "hold": 1, 
+                    "start": 1 
+                },
+                {
+                    "pitch": "F3",
+                    "start": 2
+                },
+                {
+                    "pitch": "G3",
+                    "start": 3
+                }
+            ]
+        },
+        {
+            "meta": {
+                "beats": 4
+            },
+            "notes": [
+                {
+                    "pitch": "A3", 
+                    "hold": 3, 
+                    "start": 0
+                },
+                {
+                    "pitch": "G3",
+                    "start": 3
+                },
+                {
+                    "pitch": "A3",
+                    "start": 4
+                },
+                {
+                    "pitch": "G3",
+                    "start": 5
+                },
+                {
+                    "pitch": "A3",
+                    "start": 6
+                },
+                {
+                    "pitch": "Bb3",
+                    "start": 7
+                }
+            ]
+        },
+        {
+            "notes": [
+                {
+                    "pitch": "C4", 
+                    "hold": 3, 
+                    "start": 0
+                },
+                {
+                    "pitch": "D4",
+                    "start": 3
+                },
+                {
+                    "pitch": "A3",
+                    "start": 4,
+                    "hold": 2
+                },
+                {
+                    "pitch": "A3",
+                    "start": 6
+                },
+                {
+                    "pitch": "C#4",
+                    "start": 7
+                }
+            ]
+        },
+        {
+            "notes": [
+                {
+                    "pitch": "D4", 
+                    "hold": 2, 
+                    "start": 0
+                },
+                {
+                    "pitch": "E4",
+                    "start": 2,
+                    "hold": 2
+                },
+                {
+                    "pitch": "D4",
+                    "start": 4,
+                    "hold": 2
+                },
+                {
+                    "pitch": "A3",
+                    "start": 6
+                },
+                {
+                    "pitch": "G3",
+                    "start": 7
+                }
+            ]
+        },
+        {
+            "notes": [
+                {
+                    "pitch": "F3", 
+                    "start": 0
+                },
+                {
+                    "pitch": "E3",
+                    "start": 1
+                },
+                {
+                    "pitch": "F3",
+                    "start": 2
+                },
+                {
+                    "pitch": "A3",
+                    "start": 3
+                },
+                {
+                    "pitch": "D4",
+                    "start": 4,
+                    "hold": 2
+                },
+                {
+                    "pitch": "D3",
+                    "start": 6
+                },
+                {
+                    "pitch": "E3",
+                    "start": 7
+                }
+            ]
+        },
+        {
+            "notes": [
+                {
+                    "pitch": "F3", 
+                    "start": 0,
+                    "hold": 4
+                },
+                {
+                    "pitch": "C4",
+                    "start": 4
+                },
+                {
+                    "pitch": "Bb3",
+                    "start": 5
+                },
+                {
+                    "pitch": "Bb3",
+                    "start": 6
+                },
+                {
+                    "pitch": "A3",
+                    "start": 7
+                }
+            ]
+        },
+        {
+            "notes": [
+                {
+                    "pitch": "F3", 
+                    "start": 0,
+                    "hold": 4
+                },
+                {
+                    "pitch": "D4",
+                    "start": 4
+                },
+                {
+                    "pitch": "A3",
+                    "start": 5
+                },
+                {
+                    "pitch": "A3",
+                    "start": 6
+                },
+                {
+                    "pitch": "G3",
+                    "start": 7
+                }
+            ]
+        },
+        {
+            "notes": [
+                {
+                    "pitch": "F3", 
+                    "start": 0,
+                    "hold": 6
+                },
+                {
+                    "pitch": "E3",
+                    "start": 6
+                },
+                {
+                    "pitch": "D3",
+                    "start": 7
+                }
+            ]
+        },
+        {
+            "notes": [
+                {
+                    "pitch": "E3", 
+                    "start": 0,
+                    "hold": 3
+                },
+                {
+                    "pitch": "F3",
+                    "start": 3
+                },
+                {
+                    "pitch": "G3",
+                    "start": 4
+                },
+                {
+                    "pitch": "C3",
+                    "start": 5
+                },
+                {
+                    "pitch": "C4",
+                    "start": 6
+                },
+                {
+                    "pitch": "Bb3",
+                    "start": 7
+                }
+            ]
+        },
+        {
+            "notes": [
+                {
+                    "pitch": "A3", 
+                    "hold": 3, 
+                    "start": 0
+                },
+                {
+                    "pitch": "G3",
+                    "start": 3
+                },
+                {
+                    "pitch": "A3",
+                    "start": 4
+                },
+                {
+                    "pitch": "G3",
+                    "start": 5
+                },
+                {
+                    "pitch": "A3",
+                    "start": 6
+                },
+                {
+                    "pitch": "Bb3",
+                    "start": 7
+                }
+            ]
+        },
+        {
+            "notes": [
+                {
+                    "pitch": "C4", 
+                    "hold": 2, 
+                    "start": 1
+                },
+                {
+                    "pitch": "D4",
+                    "start": 3
+                },
+                {
+                    "pitch": "A3",
+                    "start": 4
+                },
+                {
+                    "pitch": "G3",
+                    "start": 5
+                },
+                {
+                    "pitch": "A3",
+                    "start": 6
+                },
+                {
+                    "pitch": "C#4",
+                    "start": 7
+                }
+            ]
+        },
+        {
+            "notes": [
+                {
+                    "pitch": "D4", 
+                    "hold": 2, 
+                    "start": 0
+                },
+                {
+                    "pitch": "E4",
+                    "start": 2,
+                    "hold": 2
+                },
+                {
+                    "pitch": "F4",
+                    "start": 4,
+                    "hold": 2
+                },
+                {
+                    "pitch": "A3",
+                    "start": 6
+                },
+                {
+                    "pitch": "G3",
+                    "start": 7
+                }
+            ]
+        },
+        {
+            "notes": [
+                {
+                    "pitch": "F3", 
+                    "start": 0
+                },
+                {
+                    "pitch": "E3",
+                    "start": 1
+                },
+                {
+                    "pitch": "F3",
+                    "start": 2
+                },
+                {
+                    "pitch": "A3",
+                    "start": 3
+                },
+                {
+                    "pitch": "D4",
+                    "start": 4,
+                    "hold": 2
+                },
+                {
+                    "pitch": "D3",
+                    "start": 6
+                },
+                {
+                    "pitch": "E3",
+                    "start": 7
+                }
+            ]
+        },
+        {
+            "notes": [
+                {
+                    "pitch": "F3", 
+                    "start": 0,
+                    "hold": 4
+                },
+                {
+                    "pitch": "C4",
+                    "start": 4
+                },
+                {
+                    "pitch": "Bb3",
+                    "start": 5
+                },
+                {
+                    "pitch": "Bb3",
+                    "start": 6
+                },
+                {
+                    "pitch": "A3",
+                    "start": 7
+                }
+            ]
+        },
+        {
+            "notes": [
+                {
+                    "pitch": "F3", 
+                    "start": 0,
+                    "hold": 4
+                },
+                {
+                    "pitch": "D4",
+                    "start": 4
+                },
+                {
+                    "pitch": "A3",
+                    "start": 5
+                },
+                {
+                    "pitch": "A3",
+                    "start": 6
+                },
+                {
+                    "pitch": "G3",
+                    "start": 7
+                }
+            ]
+        },
+        {
+            "notes": [
+                {
+                    "pitch": "F3", 
+                    "start": 0,
+                    "hold": 6
+                },
+                {
+                    "pitch": "E3",
+                    "start": 6
+                },
+                {
+                    "pitch": "F3",
+                    "start": 7
+                }
+            ]
+        },
+        {
+            "notes": [
+                {
+                    "pitch": "G3", 
+                    "start": 0,
+                    "hold": 3
+                },
+                {
+                    "pitch": "A3",
+                    "start": 3
+                },
+                {
+                    "pitch": "Bb3",
+                    "start": 4,
+                    "hold": 2
+                },
+                {
+                    "pitch": "A3",
+                    "start": 6
+                },
+                {
+                    "pitch": "Bb3",
+                    "start": 7
+                }
+            ]
+        },
+        {
+            "notes": [
+                {
+                    "pitch": "C4", 
+                    "start": 0,
+                    "hold": 4
+                },
+                {
+                    "pitch": "C#4",
+                    "start": 4
+                },
+                {
+                    "pitch": "Bb3",
+                    "start": 5
+                },
+                {
+                    "pitch": "A3",
+                    "start": 6
+                },
+                {
+                    "pitch": "G3",
+                    "start": 7
+                }
+            ]
+        },
+        {
+            "notes": [
+                {
+                    "pitch": "F3", 
+                    "start": 0
+                },
+                {
+                    "pitch": "F3",
+                    "start": 1,
+                    "hold": 2
+                },
+                {
+                    "pitch": "E3",
+                    "start": 3
+                },
+                {
+                    "pitch": "D3",
+                    "start": 4,
+                    "hold": 2
+                },
+                {
+                    "pitch": "F3",
+                    "start": 6
+                },
+                {
+                    "pitch": "A3",
+                    "start": 7
+                }
+            ]
+        },
+        {
+            "notes": [
+                {
+                    "pitch": "G3", 
+                    "start": 0,
+                    "hold": 5
+                },
+                {
+                    "pitch": "F3",
+                    "start": 5
+                },
+                {
+                    "pitch": "D3",
+                    "start": 6
+                },
+                {
+                    "pitch": "F3",
+                    "start": 7
+                }
+            ]
+        },
+        {
+            "notes": [
+                {
+                    "pitch": "E3",
+                    "start": 0,
+                    "hold": 3
+                },
+                {
+                    "pitch": "F3",
+                    "start": 3
+                },
+                {
+                    "pitch": "G3",
+                    "start": 4,
+                    "hold": 2
+                },
+                {
+                    "pitch": "A3",
+                    "start": 6
+                },
+                {
+                    "pitch": "Bb3",
+                    "start": 7
+                }
+            ]
+        },
+        {
+            "notes": [
+                {
+                    "pitch": "C4",
+                    "start": 0,
+                    "hold": 5
+                },
+                {
+                    "pitch": "A3",
+                    "start": 5
+                },
+                {
+                    "pitch": "C#4",
+                    "start": 6
+                },
+                {
+                    "pitch": "E4",
+                    "start": 7
+                }
+            ]
+        },
+        {
+            "notes": [
+                {
+                    "pitch": "G4",
+                    "start": 0
+                },
+                {
+                    "pitch": "F4",
+                    "start": 1
+                },
+                {
+                    "pitch": "E4",
+                    "start": 2
+                },
+                {
+                    "pitch": "F4",
+                    "start": 3
+                },
+                {
+                    "pitch": "D4",
+                    "start": 4,
+                    "hold": 2
+                },
+                {
+                    "pitch": "F4",
+                    "start": 6
+                },
+                {
+                    "pitch": "A4",
+                    "start": 7
+                }
+            ]
+        },
+        {
+            "notes": [
+                {
+                    "pitch": "G4",
+                    "start": 0,
+                    "hold": 5
+                },
+                {
+                    "pitch": "F4",
+                    "start": 5
+                },
+                {
+                    "pitch": "D4",
+                    "start": 6
+                },
+                {
+                    "pitch": "F4",
+                    "start": 7
+                }
+            ]
+        },
+        {
+            "notes": [
+                {
+                    "pitch": "E4",
+                    "start": 0,
+                    "hold": 3
+                },
+                {
+                    "pitch": "F4",
+                    "start": 3
+                },
+                {
+                    "pitch": "G4",
+                    "start": 4,
+                    "hold": 2
+                },
+                {
+                    "pitch": "Bb3",
+                    "start": 6
+                },
+                {
+                    "pitch": "G3",
+                    "start": 7
+                }
+            ]
+        },
+        {
+            "repeat": {
+                "start": 1,
+                "end": 7
+            }
+        }
+    ]
+}
