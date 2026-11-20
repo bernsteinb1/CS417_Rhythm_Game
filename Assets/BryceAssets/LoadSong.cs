@@ -1,6 +1,9 @@
 using UnityEngine;
 using System.IO;
 using System.Text.Json;
+using System.Collections.Generic;
+using System.Linq;
+using System;
 
 
 public class LoadSong : MonoBehaviour
@@ -12,6 +15,22 @@ public class LoadSong : MonoBehaviour
         public int audioIdx;
     };
 
+    public struct Measure
+    {
+        public List<Note> notes;
+        public double tempo;
+        public int beats;
+        public int subdivision;
+
+        public Measure(Measure prev)
+        {
+            notes = new();
+            tempo = prev.tempo;
+            beats = prev.beats;
+            subdivision = prev.subdivision;
+        }
+    }
+
     static JsonDocumentOptions options = new()
     {
         CommentHandling = JsonCommentHandling.Skip,
@@ -21,6 +40,10 @@ public class LoadSong : MonoBehaviour
     public string SongFile;
 
     public Piano sounds;
+    List<Measure> measures = new();
+    List<int> measureOrder = new();
+    double nextMeasureStartTime;
+    int currentMeasure = 0;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -29,104 +52,136 @@ public class LoadSong : MonoBehaviour
         var config = JsonDocument.Parse(jsoncContent, options);
         var dict = config.RootElement;
 
-        JsonElement measures = dict.GetProperty("measures");
+        JsonElement jsonMeasures = dict.GetProperty("measures");
+        
 
-        double timestamp = 0.0;
-
-        double tempo = 60.0;
-        int beats = 4;
-        int subdivision = 1;
-        double startTime = AudioSettings.dspTime;
-
-        foreach (JsonElement measure in measures.EnumerateArray())
+        Measure prevMeasure = new()
         {
-            if (measure.TryGetProperty("meta", out JsonElement metadata)) {
-                if (metadata.TryGetProperty("tempo", out JsonElement tempoEl) && tempoEl.TryGetDouble(out double newTempo))
-                    tempo = newTempo;
+            tempo = 60.0,
+            beats = 4,
+            subdivision = 1
+        };
 
-                if (metadata.TryGetProperty("beats", out JsonElement beatsEl) && beatsEl.TryGetInt32(out int newBeats))
-                    beats = newBeats;
-
-                if (metadata.TryGetProperty("subdivision", out JsonElement subdivEl) && subdivEl.TryGetInt32(out int newSubdivision))
-                    subdivision = newSubdivision;
-            }
-
-            if (measure.TryGetProperty("notes", out JsonElement notes))
-            {
-                foreach (JsonElement note in notes.EnumerateArray())
-                {
-                    Note n;
-                    int holdBeats = note.TryGetProperty("hold", out JsonElement holdLengthEl) ? holdLengthEl.GetInt32() : 1;
-                    n.holdTime = holdBeats * 60.0 / tempo / subdivision;
-                    n.startTime = timestamp + note.GetProperty("start").GetInt32() * 60 / tempo / subdivision;
-                    n.audioIdx = ParseNote(note.GetProperty("pitch").GetString());
-                    AudioSource newKey = Instantiate(sounds.keys[n.audioIdx]);
-                    newKey.PlayScheduled(startTime + n.startTime);
-                    newKey.SetScheduledEndTime(startTime + n.startTime + n.holdTime);
-                }
-            }
-
-            timestamp += 60.0 / tempo * beats;
+        foreach (JsonElement measure in jsonMeasures.EnumerateArray())
+        {
+            Measure m = new(prevMeasure);
+            ReadMeasure(ref m, measure);
+            prevMeasure = m;
         }
-        Debug.Log("Done");
+
+        config.Dispose();
+
+        Debug.Log("JSON File Loaded. Playback starting.");
+
+        if (measures.Count == 0) return;
+
+        double timestamp = AudioSettings.dspTime + 1;
+        PlayMeasure(timestamp);
+        currentMeasure++;
+        timestamp += measures[0].beats * 60.0 / measures[0].tempo;
+        nextMeasureStartTime = timestamp;
+        if (measureOrder.Count > 1) {
+            PlayMeasure(timestamp);
+            currentMeasure++;
+        }
+    }
+    
+    void PlayMeasure(double startTime)
+    {
+        Measure m = measures[measureOrder[currentMeasure]];
+        foreach (Note n in m.notes)
+        {
+            AudioSource sound = Instantiate(sounds.keys[n.audioIdx], sounds.transform);
+            sound.PlayScheduled(startTime + n.startTime);
+            sound.SetScheduledEndTime(startTime + n.startTime + n.holdTime);
+            Destroy(sound.gameObject, (float) (startTime + n.startTime + n.holdTime - AudioSettings.dspTime + 0.1));
+        }
+    }
+
+    void ReadMeasure(ref Measure m, JsonElement data)
+    {
+        if (data.TryGetProperty("meta", out JsonElement metadata)) 
+        {
+            if (metadata.TryGetProperty("tempo", out JsonElement tempoEl) && tempoEl.TryGetDouble(out double newTempo))
+                m.tempo = newTempo;
+
+            if (metadata.TryGetProperty("beats", out JsonElement beatsEl) && beatsEl.TryGetInt32(out int newBeats))
+                m.beats = newBeats;
+
+            if (metadata.TryGetProperty("subdivision", out JsonElement subdivEl) && subdivEl.TryGetInt32(out int newSubdivision))
+                m.subdivision = newSubdivision;
+        }
+
+        if (data.TryGetProperty("notes", out JsonElement notes))
+        {
+            foreach (JsonElement note in notes.EnumerateArray())
+            {
+                Note n;
+                int holdBeats = note.TryGetProperty("hold", out JsonElement holdLengthEl) ? holdLengthEl.GetInt32() : 1;
+                n.holdTime = holdBeats * 60.0 / m.tempo / m.subdivision;
+                n.startTime = note.GetProperty("start").GetInt32() * 60.0 / m.tempo / m.subdivision;
+                n.audioIdx = ParseNote(note.GetProperty("pitch").GetString());
+                m.notes.Add(n);
+            }
+        }
+        if (data.TryGetProperty("repeat", out JsonElement repeat))
+        {
+            for(int i = repeat.GetProperty("start").GetInt32(); i < repeat.GetProperty("end").GetInt32(); i++)
+            {
+                measureOrder.Add(i);
+            }
+        }
+        else
+        {
+            measures.Add(m);
+            measureOrder.Add(measures.Count - 1);
+        }
     }
 
     static int ParseNote(string note)
     {
-        switch (note)
+        return note switch
         {
-            case "C3":
-                return 0;
-            case "C#3" or "Db3":
-                return 1;
-            case "D3":
-                return 2;
-            case "Eb3" or "D#3":
-                return 3;
-            case "E3" or "Fb3":
-                return 4;
-            case "F3" or "E#3":
-                return 5;
-            case "F#3" or "Gb3":
-                return 6;
-            case "G3":
-                return 7;
-            case "G#3" or "Ab3":
-                return 8;
-            case "A3":
-                return 9;
-            case "A#3" or "Bb3":
-                return 10;
-            case "B3" or "Cb4":
-                return 11;
-            case "C4" or "B#3":
-                return 12;
-            case "C#4" or "Db4":
-                return 13;
-            case "D4":
-                return 14;
-            case "Eb4" or "D#4":
-                return 15;
-            case "E4" or "Fb4":
-                return 16;
-            case "F4" or "E#4":
-                return 17;
-            case "F#4" or "Gb4":
-                return 18;
-            case "G4":
-                return 19;
-            case "G#4" or "Ab4":
-                return 20;
-            case "A4":
-                return 21;
-            case "A#4" or "Bb4":
-                return 22;
-            case "B4" or "Cb5":
-                return 23;
-            case "C5" or "B#4":
-                return 24;
-            default:
-                return 12;
+            "C3" => 0,
+            "C#3" or "Db3" => 1,
+            "D3" => 2,
+            "Eb3" or "D#3" => 3,
+            "E3" or "Fb3" => 4,
+            "F3" or "E#3" => 5,
+            "F#3" or "Gb3" => 6,
+            "G3" => 7,
+            "G#3" or "Ab3" => 8,
+            "A3" => 9,
+            "A#3" or "Bb3" => 10,
+            "B3" or "Cb4" => 11,
+            "C4" or "B#3" => 12,
+            "C#4" or "Db4" => 13,
+            "D4" => 14,
+            "Eb4" or "D#4" => 15,
+            "E4" or "Fb4" => 16,
+            "F4" or "E#4" => 17,
+            "F#4" or "Gb4" => 18,
+            "G4" => 19,
+            "G#4" or "Ab4" => 20,
+            "A4" => 21,
+            "A#4" or "Bb4" => 22,
+            "B4" or "Cb5" => 23,
+            "C5" or "B#4" => 24,
+            _ => 12,
+        };
+    }
+
+    void Update()
+    {
+        if (AudioSettings.dspTime < nextMeasureStartTime) return;
+
+        if (currentMeasure >= measureOrder.Count)
+        {
+            Destroy(this);
+            return;
         }
+        nextMeasureStartTime += measures[measureOrder[currentMeasure - 1]].beats * 60.0 / measures[measureOrder[currentMeasure - 1]].tempo;
+        PlayMeasure(nextMeasureStartTime);
+        currentMeasure++;
     }
 }

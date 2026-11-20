@@ -500,7 +500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 864c9251acf8f4eaaaa7c48509df714c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LoadSong
-  SongFile: Assets/BryceAssets/chart_template.jsonc
+  SongFile: Assets/BryceAssets/littleroot.jsonc
   sounds: {fileID: 1666302592}
 --- !u!4 &1804870569
 Transform:
