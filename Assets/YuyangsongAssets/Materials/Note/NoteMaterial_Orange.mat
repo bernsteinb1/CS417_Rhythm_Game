@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: NoteTrackMaterial_Blue
+  m_Name: NoteMaterial_Orange
   m_Shader: {fileID: -6465566751694194690, guid: ef59fc79438f92b48ab5c39e3740efa3, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -42,7 +42,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseTexture:
-        m_Texture: {fileID: 2800000, guid: ea6f307cdbe90404e89e5f70d10dbdc6, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6084ea577a3fb9047aeaf00b15b04b74, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -66,7 +66,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissiveTexture:
-        m_Texture: {fileID: 2800000, guid: 89531081b5c023a4893d78f4ade3fff8, type: 3}
+        m_Texture: {fileID: 2800000, guid: da4e1a5f51dfe774a9a75f04fc855746, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -82,7 +82,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalTexture:
-        m_Texture: {fileID: 2800000, guid: 9e9a5d0e0b55bce4c8a68a5401d7dc25, type: 3}
+        m_Texture: {fileID: 2800000, guid: cb99b8c1273e1ef428edee8fbff9cf67, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -123,7 +123,7 @@ Material:
     - _Cutoff: 0.209
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _DistortionStrength: 3
+    - _DistortionStrength: 0.1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EmissionStrength: 2
@@ -133,7 +133,7 @@ Material:
     - _GlossyReflections: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
-    - _Opacity: 1
+    - _Opacity: 0.72
     - _Parallax: 0.01
     - _QueueControl: 0
     - _QueueOffset: 0
