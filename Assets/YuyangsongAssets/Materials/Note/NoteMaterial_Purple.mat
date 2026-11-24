@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: NoteTrackMaterial_Purple
+  m_Name: NoteMaterial_Purple
   m_Shader: {fileID: -6465566751694194690, guid: ef59fc79438f92b48ab5c39e3740efa3, type: 3}
   m_Parent: {fileID: 2100000, guid: 7be6f1ea389ac0f4b9eaa7285de7aae5, type: 2}
   m_ModifiedSerializedProperties: 0
@@ -38,21 +38,22 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseTexture:
-        m_Texture: {fileID: 2800000, guid: fdf6592c746fea94ca374820911220ae, type: 3}
+        m_Texture: {fileID: 2800000, guid: 85903384faf73b046b586ae3bf014b89, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissiveTexture:
-        m_Texture: {fileID: 2800000, guid: f9a16a49d29d1e642b30bbc876a7e286, type: 3}
+        m_Texture: {fileID: 2800000, guid: 90856b97cfd0cbf408d4a597a12f20c1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalTexture:
-        m_Texture: {fileID: 2800000, guid: 4f32d10918e4b32468337056edebd3e4, type: 3}
+        m_Texture: {fileID: 2800000, guid: f0c544b54b4aa394f976328910821c54, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _DistortionStrength: 5
+    - _DistortionStrength: 0.1
+    - _EmissionStrength: 2
     m_Colors:
-    - _NoiseSpeed: {r: 0.15, g: -0.15, b: 0, a: 0}
+    - _NoiseSpeed: {r: 0.15, g: 0.15, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
