@@ -43,9 +43,11 @@ public class LoadSong : MonoBehaviour
     List<int> measureOrder = new();
     double nextMeasureStartTime;
     int currentMeasure = 0;
+    double offset;
+    string songPath;
+    bool playing;
     
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         string jsoncContent = File.ReadAllText(SongFile);
         var config = JsonDocument.Parse(jsoncContent, options);
@@ -67,32 +69,34 @@ public class LoadSong : MonoBehaviour
             prevMeasure = m;
         }
 
+        songPath = dict.GetProperty("filepath").GetString();
+        offset = dict.GetProperty("offset").GetDouble();
+
+        Debug.Log("JSON File Loaded.");
+    }
+
+    public void StartPlayback(double startTime)
+    {
         if (measures.Count == 0) return;
 
-        double timestamp = AudioSettings.dspTime + 1;
-
-        string songPath = dict.GetProperty("filepath").GetString();
-        double offset = dict.GetProperty("offset").GetDouble();
+        playing = true;
         AudioSource song = sounds.gameObject.transform.AddComponent<AudioSource>();
         song.volume = 0.2f;
         song.clip = Resources.Load<AudioClip>($"Songs/{songPath}");
         if (offset >= 0)
-            song.PlayScheduled(timestamp + offset);
+            song.PlayScheduled(startTime + offset);
         else
         {
             // we want to start somewhere in the song file
             song.timeSamples = (int) (-offset * song.clip.frequency);
-            song.PlayScheduled(timestamp + offset);
+            song.PlayScheduled(startTime + offset);
         }
-
-        Debug.Log("JSON File Loaded. Playback starting.");
-
-        PlayMeasure(timestamp);
+        PlayMeasure(startTime);
         currentMeasure++;
-        timestamp += measures[0].beats * 60.0 / measures[0].tempo;
-        nextMeasureStartTime = timestamp;
+        startTime += measures[0].beats * 60.0 / measures[0].tempo;
+        nextMeasureStartTime = startTime;
         if (measureOrder.Count > 1) {
-            PlayMeasure(timestamp);
+            PlayMeasure(startTime);
             currentMeasure++;
         }
     }
@@ -134,6 +138,7 @@ public class LoadSong : MonoBehaviour
                 n.audioIdx = ParseNote(note.GetProperty("pitch").GetString());
                 m.notes.Add(n);
             }
+            // m.notes.Sort((a, b) => a.startTime.CompareTo(b.startTime));
         }
         if (data.TryGetProperty("repeat", out JsonElement repeat))
         {
@@ -184,15 +189,36 @@ public class LoadSong : MonoBehaviour
 
     void Update()
     {
-        if (AudioSettings.dspTime < nextMeasureStartTime) return;
+        if (!playing || AudioSettings.dspTime < nextMeasureStartTime) return;
 
         if (currentMeasure >= measureOrder.Count)
         {
-            Destroy(this);
+            playing = false;
             return;
         }
         nextMeasureStartTime += measures[measureOrder[currentMeasure - 1]].beats * 60.0 / measures[measureOrder[currentMeasure - 1]].tempo;
         PlayMeasure(nextMeasureStartTime);
         currentMeasure++;
+    }
+
+    public List<Note> CompileToNoteList()
+    {
+        List<Note> output = new();
+        double timestamp = 0;
+        for (int i = 0; i < measureOrder.Count; i++)
+        {
+            Measure m = measures[measureOrder[i]];
+            List<Note> notes = m.notes;
+            for (int j = 0; j < notes.Count; j++)
+            {
+                Note n;
+                n.startTime = timestamp + notes[j].startTime;
+                n.holdTime = notes[j].holdTime;
+                n.audioIdx = notes[j].audioIdx;
+                output.Add(n);
+            }
+            timestamp += 60.0 / m.tempo * m.beats;
+        }
+        return output;
     }
 }
