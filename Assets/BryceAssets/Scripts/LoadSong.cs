@@ -2,8 +2,7 @@ using UnityEngine;
 using System.IO;
 using System.Text.Json;
 using System.Collections.Generic;
-using System.Linq;
-using System;
+using Unity.VisualScripting;
 
 
 public class LoadSong : MonoBehaviour
@@ -53,7 +52,6 @@ public class LoadSong : MonoBehaviour
         var dict = config.RootElement;
 
         JsonElement jsonMeasures = dict.GetProperty("measures");
-        
 
         Measure prevMeasure = new()
         {
@@ -69,13 +67,26 @@ public class LoadSong : MonoBehaviour
             prevMeasure = m;
         }
 
-        config.Dispose();
-
-        Debug.Log("JSON File Loaded. Playback starting.");
-
         if (measures.Count == 0) return;
 
         double timestamp = AudioSettings.dspTime + 1;
+
+        string songPath = dict.GetProperty("filepath").GetString();
+        double offset = dict.GetProperty("offset").GetDouble();
+        AudioSource song = sounds.gameObject.transform.AddComponent<AudioSource>();
+        song.volume = 0.2f;
+        song.clip = Resources.Load<AudioClip>($"Songs/{songPath}");
+        if (offset >= 0)
+            song.PlayScheduled(timestamp + offset);
+        else
+        {
+            // we want to start somewhere in the song file
+            song.timeSamples = (int) (-offset * song.clip.frequency);
+            song.PlayScheduled(timestamp + offset);
+        }
+
+        Debug.Log("JSON File Loaded. Playback starting.");
+
         PlayMeasure(timestamp);
         currentMeasure++;
         timestamp += measures[0].beats * 60.0 / measures[0].tempo;

@@ -5,6 +5,17 @@ public class Game : MonoBehaviour
 {
     public static Game Instance { get; private set; }
     public XROrigin rig;
+    private double latency;
+
+    public double GetLatency()
+    {
+        return latency;
+    }
+
+    public void SetLatency(double newLatency)
+    {
+        latency = newLatency;
+    }
     
     private void Awake()
     {

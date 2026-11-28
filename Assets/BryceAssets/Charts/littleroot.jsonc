@@ -1,12 +1,12 @@
 {
     "title": "Littleroot Town", 
     "length": 180, 
-    "offset": 0.0, 
-    "filepath": "example.wav", 
+    "offset": -0.5504672897, // number from some math and some vibes, may need fixing
+    "filepath": "Littleroot", 
     "measures": [
         {
             "meta": {
-                "tempo": 110.0, 
+                "tempo": 107.0, 
                 "beats": 2, 
                 "subdivision": 2 
             },
@@ -659,6 +659,18 @@
                 "start": 1,
                 "end": 7
             }
+        },
+        {
+            "meta": {
+                "beats": 1,
+                "subdivision": 1
+            },
+            "notes": [
+                {
+                    "pitch": "F3",
+                    "start": 0
+                }
+            ]
         }
     ]
 }
